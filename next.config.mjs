@@ -6,7 +6,7 @@ const nextConfig = {
     return [
       {
         source: "/api/:path*",
-        destination: "https://ministry-fixed-assets-api.onrender.com/:path*"
+        destination: `${process.env.BACKEND_URL}/:path*`,
       },
     ];
   },
