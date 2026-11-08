@@ -311,7 +311,14 @@ export default function HomePage() {
                 onClick={closeMenu}
                 className="mt-1 flex items-center justify-center gap-2 rounded-xl bg-[#1597E5] px-5 py-3 text-sm font-semibold text-white"
               >
-                Staff Sign In <ArrowRight size={16} />
+                Sign In <ArrowRight size={16} />
+              </Link>
+              <Link
+                href="/register"
+                onClick={closeMenu}
+                className="mt-1 flex items-center justify-center gap-2 rounded-xl bg-[#1597E5] px-5 py-3 text-sm font-semibold text-white"
+              >
+                Sign up <ArrowRight size={16} />
               </Link>
             </div>
           </div>
