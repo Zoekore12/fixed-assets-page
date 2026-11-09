@@ -316,7 +316,7 @@ export default function HomePage() {
               <Link
                 href="/register"
                 onClick={closeMenu}
-                className="mt-1 flex items-center justify-center gap-2 rounded-xl bg-[#1597E5] px-5 py-3 text-sm font-semibold text-white"
+                className="mt-1 flex items-center justify-center gap-2 rounded-xl border-[#1597E5] bg-sky px-5 py-3 text-sm font-semibold text-[#1597E5] shadow-md shadow-blue-500/20 transition hover:-translate-y-0.5 hover:bg-[#117FC2]"
               >
                 Sign up <ArrowRight size={16} />
               </Link>
