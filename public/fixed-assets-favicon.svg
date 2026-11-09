@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title">
+  <title id="title">Fixed Assets Management</title>
+  <defs>
+    <linearGradient id="blue" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1597E5"/>
+      <stop offset="100%" stop-color="#082B68"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="512" height="512" rx="100" fill="url(#blue)"/>
+
+  <!-- Government building -->
+  <path d="M100 184 256 105 412 184Z" fill="#fff"/>
+  <path d="M118 193h276v25H118z" fill="#D7EAFE"/>
+  <path d="M143 225h32v120h-32z M240 225h32v120h-32z M337 225h32v120h-32z" fill="#fff"/>
+  <path d="M120 350h272v26H120z" fill="#D7EAFE"/>
+
+  <!-- Asset checklist -->
+  <rect x="116" y="285" width="205" height="164" rx="20" fill="#fff" stroke="#082B68" stroke-width="10"/>
+  <rect x="137" y="309" width="42" height="42" rx="9" fill="#1597E5"/>
+  <path d="m146 329 9 9 16-19" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M195 322h96M195 340h75" stroke="#91B9E5" stroke-width="9" stroke-linecap="round"/>
+  <rect x="137" y="365" width="42" height="42" rx="9" fill="#1597E5"/>
+  <path d="m146 385 9 9 16-19" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M195 378h96M195 396h75" stroke="#91B9E5" stroke-width="9" stroke-linecap="round"/>
+
+  <!-- Barcode asset tag -->
+  <rect x="280" y="382" width="106" height="76" rx="12" fill="#fff" stroke="#082B68" stroke-width="8"/>
+  <path d="M300 399v43M311 399v43M322 399v43M337 399v43M347 399v43M360 399v43" stroke="#082B68" stroke-width="6"/>
+</svg>

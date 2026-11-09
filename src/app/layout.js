@@ -15,9 +15,14 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata = {
-  title: "Fixed Assets | Ministry Management System",
+  title: "Fixed Assets Management System",
   description:
-    "Ministry Fixed Assets Management System for asset registration, tracking, maintenance, and valuation.",
+    "Fixed Assets Management System for asset registration, tracking, maintenance, and valuation.",
+    icons: {
+    icon: "/fixed-assets-favicon.svg",
+    shortcut: "/fixed-assets-favicon.svg",
+    apple: "/fixed-assets-favicon.svg",
+  },
 };
 
 export default function RootLayout({ children }) {
