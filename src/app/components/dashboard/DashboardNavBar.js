@@ -391,7 +391,7 @@ export default function DashboardNavbar({
                 onClick={() => setNotificationsOpen(false)}
               />
 
-              {/* Notification modal */}
+            {/* Notification modal */}
             <div className="fixed right-2 top-20 z-50 flex max-h-[calc(100dvh-6rem)] w-[calc(100vw-1rem)] max-w-[380px] flex-col overflow-hidden rounded-xl border border-slate-200 bg-white shadow-2xl dark:border-slate-700 dark:bg-slate-800 sm:absolute sm:right-0 sm:top-full sm:mt-3 sm:w-[380px] sm:max-w-[calc(100vw-2rem)]">
 
               {/* Modal heading */}
@@ -576,9 +576,7 @@ export default function DashboardNavbar({
 
         <div className="profile-divider" />
 
-        {/* --------------------------------------------------
-            PROFILE MENU
-        -------------------------------------------------- */}
+        {/*PROFILE MENU*/}
 
         <div className="relative">
           <button

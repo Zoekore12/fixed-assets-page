@@ -23,6 +23,29 @@ export const metadata = {
     shortcut: "/fixed-assets-favicon.svg",
     apple: "/fixed-assets-favicon.svg",
   },
+  openGraph: {
+    title: "Fixed Assets Management System",
+    description:
+      "Fixed Assets Management System for asset registration, tracking, maintenance, and valuation.",
+    url: "https://fixed-assets-page.vercel.app",
+    siteName: "Fixed Assets Management System",
+    images: [
+      {
+        url: "/fixed-assets-favicon.png",
+        width: 1200,
+        height: 630,
+        alt: "Fixed Assets Management System",
+      },
+    ],
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Fixed Assets Management System",
+    description:
+      " Fixed Assets Management System for asset registration, tracking, maintenance, and valuation.",
+    images: ["/fixed-assets-favicon.png"],
+  },
 };
 
 export default function RootLayout({ children }) {
