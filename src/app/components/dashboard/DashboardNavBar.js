@@ -392,195 +392,184 @@ export default function DashboardNavbar({
               />
 
               {/* Notification modal */}
-              <div className="absolute right-0 top-full z-50 mt-3 w-[380px] max-w-[calc(100vw-2rem)] overflow-hidden rounded-xl border border-slate-200 bg-white shadow-2xl dark:border-slate-700 dark:bg-slate-800">
-                {/* Modal heading */}
-                <div className="flex items-center justify-between border-b border-slate-100 px-4 py-4 dark:border-slate-700">
-                  <div>
-                    <h3 className="text-sm font-bold text-slate-900 dark:text-white">
-                      Notifications
-                    </h3>
+            <div className="fixed right-2 top-20 z-50 flex max-h-[calc(100dvh-6rem)] w-[calc(100vw-1rem)] max-w-[380px] flex-col overflow-hidden rounded-xl border border-slate-200 bg-white shadow-2xl dark:border-slate-700 dark:bg-slate-800 sm:absolute sm:right-0 sm:top-full sm:mt-3 sm:w-[380px] sm:max-w-[calc(100vw-2rem)]">
 
-                    <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">
-                      {unreadCount} unread notification
-                      {unreadCount === 1 ? "" : "s"}
-                    </p>
-                  </div>
+              {/* Modal heading */}
+              <div className="flex shrink-0 items-center justify-between gap-2 border-b border-slate-100 px-4 py-4 dark:border-slate-700">
+                <div className="min-w-0">
+                  <h3 className="text-sm font-bold text-slate-900 dark:text-white">
+                    Notifications
+                  </h3>
 
-                  <div className="flex items-center gap-2">
-                    {unreadCount > 0 && (
-                      <span className="rounded-full bg-sky-100 px-2.5 py-1 text-xs font-semibold text-sky-700 dark:bg-sky-900/50 dark:text-sky-300">
-                        {unreadCount} New
-                      </span>
-                    )}
-
-                    <button
-                      type="button"
-                      onClick={loadNotifications}
-                      disabled={notificationsLoading}
-                      title="Refresh notifications"
-                      className="rounded-lg p-2 text-slate-500 transition hover:bg-slate-100 hover:text-blue-600 dark:hover:bg-slate-700"
-                    >
-                      <RefreshCw
-                        size={16}
-                        className={
-                          notificationsLoading ? "animate-spin" : ""
-                        }
-                      />
-                    </button>
-                  </div>
+                  <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">
+                    {unreadCount} unread notification
+                    {unreadCount === 1 ? "" : "s"}
+                  </p>
                 </div>
 
-                {/* Error message */}
-                {notificationError && (
-                  <div className="mx-3 mt-3 rounded-lg bg-red-50 px-3 py-2 text-xs text-red-600 dark:bg-red-950/30 dark:text-red-300">
-                    {notificationError}
-                    <button
-                      type="button"
-                      onClick={loadNotifications}
-                      className="ml-2 font-semibold underline"
-                    >
-                      Retry
-                    </button>
-                  </div>
-                )}
-
-                {/* Actual notifications */}
-                <div className="max-h-[400px] overflow-y-auto">
-                  {notificationsLoading ? (
-                    <div className="px-4 py-12 text-center">
-                      <RefreshCw
-                        size={25}
-                        className="mx-auto animate-spin text-sky-600"
-                      />
-
-                      <p className="mt-3 text-sm text-slate-500 dark:text-slate-400">
-                        Loading notifications...
-                      </p>
-                    </div>
-                  ) : notifications.length === 0 ? (
-                    <div className="px-4 py-12 text-center">
-                      <Inbox
-                        size={32}
-                        className="mx-auto mb-3 text-slate-300 dark:text-slate-600"
-                      />
-
-                      <p className="text-sm font-semibold text-slate-700 dark:text-slate-200">
-                        No notifications yet
-                      </p>
-
-                      <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">
-                        You&apos;re all caught up.
-                      </p>
-                    </div>
-                  ) : (
-                    notifications.map((notification) => (
-                      <div
-                        key={notification.id}
-                        className={`flex items-start gap-3 border-b border-slate-100 px-4 py-4 transition dark:border-slate-700 ${
-                          !notification.is_read
-                            ? "bg-sky-50/70 dark:bg-sky-900/10"
-                            : "hover:bg-slate-50 dark:hover:bg-slate-700/50"
-                        }`}
-                      >
-                        {/* Read status indicator */}
-                        <span
-                          className={`mt-2 h-2.5 w-2.5 shrink-0 rounded-full ${
-                            notification.is_read
-                              ? "bg-slate-300 dark:bg-slate-600"
-                              : "bg-sky-500"
-                          }`}
-                        />
-
-                        {/* Clickable notification content */}
-                        <button
-                          type="button"
-                          onClick={() =>
-                            handleNotificationClick(notification)
-                          }
-                          className="min-w-0 flex-1 text-left"
-                        >
-                          <div className="flex items-center gap-2">
-                            <p className="truncate text-sm font-semibold text-slate-900 dark:text-white">
-                              {notification.title}
-                            </p>
-
-                            {!notification.is_read && (
-                              <span className="shrink-0 rounded-full bg-sky-100 px-2 py-0.5 text-[9px] font-bold uppercase text-sky-700 dark:bg-sky-900/50 dark:text-sky-300">
-                                New
-                              </span>
-                            )}
-                          </div>
-
-                          <p className="mt-1 line-clamp-2 text-xs leading-5 text-slate-600 dark:text-slate-300">
-                            {notification.message}
-                          </p>
-
-                          <div className="mt-2 flex flex-wrap items-center gap-2">
-                            {notification.category && (
-                              <span className="rounded-md bg-slate-100 px-2 py-1 text-[10px] font-medium capitalize text-slate-600 dark:bg-slate-700 dark:text-slate-300">
-                                {notification.category.replaceAll("_", " ")}
-                              </span>
-                            )}
-
-                            <span className="text-[10px] text-slate-400">
-                              {formatNotificationDate(
-                                notification.created_at
-                              )}
-                            </span>
-                          </div>
-                        </button>
-
-                        {/* Mark as read */}
-                        {!notification.is_read && (
-                          <button
-                            type="button"
-                            title="Mark as read"
-                            aria-label="Mark as read"
-                            disabled={
-                              notificationActionLoading === notification.id
-                            }
-                            onClick={() =>
-                              handleMarkAsRead(notification.id)
-                            }
-                            className="shrink-0 rounded-lg p-2 text-slate-400 transition hover:bg-sky-100 hover:text-sky-700 disabled:opacity-50 dark:hover:bg-sky-900/50"
-                          >
-                            <Check size={16} />
-                          </button>
-                        )}
-                      </div>
-                    ))
+                <div className="flex shrink-0 items-center gap-2">
+                  {unreadCount > 0 && (
+                    <span className="rounded-full bg-sky-100 px-2.5 py-1 text-xs font-semibold text-sky-700 dark:bg-sky-900/50 dark:text-sky-300">
+                      {unreadCount} New
+                    </span>
                   )}
-                </div>
 
-                {/* Modal footer */}
-                <div className="border-t border-slate-100 p-3 dark:border-slate-700">
-                  <div className="flex items-center gap-2">
-                    <button
-                      type="button"
-                      disabled={
-                        unreadCount === 0 ||
-                        notificationActionLoading === "all"
-                      }
-                      onClick={handleMarkAllAsRead}
-                      className="flex flex-1 items-center justify-center gap-2 rounded-lg border border-slate-200 px-3 py-2.5 text-xs font-semibold text-slate-600 transition hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-50 dark:border-slate-600 dark:text-slate-300 dark:hover:bg-slate-700"
-                    >
-                      <CheckCheck size={15} />
-                      Mark all read
-                    </button>
-
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setNotificationsOpen(false);
-                        router.push("/notification");
-                      }}
-                      className="flex-1 rounded-lg bg-sky-50 px-3 py-2.5 text-center text-xs font-semibold text-sky-700 transition hover:bg-sky-100 dark:bg-sky-900/30 dark:text-sky-300 dark:hover:bg-sky-900/50"
-                    >
-                      View all notifications
-                    </button>
-                  </div>
+                  <button
+                    type="button"
+                    onClick={loadNotifications}
+                    disabled={notificationsLoading}
+                    title="Refresh notifications"
+                    className="rounded-lg p-2 text-slate-500 transition hover:bg-slate-100 hover:text-blue-600 dark:hover:bg-slate-700"
+                  >
+                    <RefreshCw
+                      size={16}
+                      className={notificationsLoading ? "animate-spin" : ""}
+                    />
+                  </button>
                 </div>
               </div>
+
+              {/* Error message */}
+              {notificationError && (
+                <div className="mx-3 mt-3 shrink-0 rounded-lg bg-red-50 px-3 py-2 text-xs text-red-600 dark:bg-red-950/30 dark:text-red-300">
+                  {notificationError}
+                  <button
+                    type="button"
+                    onClick={loadNotifications}
+                    className="ml-2 font-semibold underline"
+                  >
+                    Retry
+                  </button>
+                </div>
+              )}
+
+              {/* Actual notifications */}
+              <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain">
+                {notificationsLoading ? (
+                  <div className="px-4 py-12 text-center">
+                    <RefreshCw
+                      size={25}
+                      className="mx-auto animate-spin text-sky-600"
+                    />
+
+                    <p className="mt-3 text-sm text-slate-500 dark:text-slate-400">
+                      Loading notifications...
+                    </p>
+                  </div>
+                ) : notifications.length === 0 ? (
+                  <div className="px-4 py-12 text-center">
+                    <Inbox
+                      size={32}
+                      className="mx-auto mb-3 text-slate-300 dark:text-slate-600"
+                    />
+
+                    <p className="text-sm font-semibold text-slate-700 dark:text-slate-200">
+                      No notifications yet
+                    </p>
+
+                    <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">
+                      You&apos;re all caught up.
+                    </p>
+                  </div>
+                ) : (
+                  notifications.map((notification) => (
+                    <div
+                      key={notification.id}
+                      className={`flex items-start gap-3 border-b border-slate-100 px-4 py-4 transition dark:border-slate-700 ${
+                        !notification.is_read
+                          ? "bg-sky-50/70 dark:bg-sky-900/10"
+                          : "hover:bg-slate-50 dark:hover:bg-slate-700/50"
+                      }`}
+                    >
+                      <span
+                        className={`mt-2 h-2.5 w-2.5 shrink-0 rounded-full ${
+                          notification.is_read
+                            ? "bg-slate-300 dark:bg-slate-600"
+                            : "bg-sky-500"
+                        }`}
+                      />
+
+                      <button
+                        type="button"
+                        onClick={() => handleNotificationClick(notification)}
+                        className="min-w-0 flex-1 text-left"
+                      >
+                        <div className="flex flex-wrap items-center gap-2">
+                          <p className="break-words text-sm font-semibold text-slate-900 dark:text-white">
+                            {notification.title}
+                          </p>
+
+                          {!notification.is_read && (
+                            <span className="shrink-0 rounded-full bg-sky-100 px-2 py-0.5 text-[9px] font-bold uppercase text-sky-700 dark:bg-sky-900/50 dark:text-sky-300">
+                              New
+                            </span>
+                          )}
+                        </div>
+
+                        <p className="mt-1 line-clamp-2 break-words text-xs leading-5 text-slate-600 dark:text-slate-300">
+                          {notification.message}
+                        </p>
+
+                        <div className="mt-2 flex flex-wrap items-center gap-2">
+                          {notification.category && (
+                            <span className="rounded-md bg-slate-100 px-2 py-1 text-[10px] font-medium capitalize text-slate-600 dark:bg-slate-700 dark:text-slate-300">
+                              {notification.category.replaceAll("_", " ")}
+                            </span>
+                          )}
+
+                          <span className="text-[10px] text-slate-400">
+                            {formatNotificationDate(notification.created_at)}
+                          </span>
+                        </div>
+                      </button>
+
+                      {!notification.is_read && (
+                        <button
+                          type="button"
+                          title="Mark as read"
+                          aria-label="Mark as read"
+                          disabled={notificationActionLoading === notification.id}
+                          onClick={() => handleMarkAsRead(notification.id)}
+                          className="shrink-0 rounded-lg p-2 text-slate-400 transition hover:bg-sky-100 hover:text-sky-700 disabled:opacity-50 dark:hover:bg-sky-900/50"
+                        >
+                          <Check size={16} />
+                        </button>
+                      )}
+                    </div>
+                  ))
+                )}
+              </div>
+
+              {/* Modal footer */}
+              <div className="shrink-0 border-t border-slate-100 p-3 dark:border-slate-700">
+                <div className="flex items-center gap-2">
+                  <button
+                    type="button"
+                    disabled={
+                      unreadCount === 0 ||
+                      notificationActionLoading === "all"
+                    }
+                    onClick={handleMarkAllAsRead}
+                    className="flex min-w-0 flex-1 items-center justify-center gap-1.5 rounded-lg border border-slate-200 px-2 py-2.5 text-center text-xs font-semibold text-slate-600 transition hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-50 dark:border-slate-600 dark:text-slate-300 dark:hover:bg-slate-700"
+                  >
+                    <CheckCheck size={15} className="shrink-0" />
+                    <span>Mark all read</span>
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setNotificationsOpen(false);
+                      router.push("/notification");
+                    }}
+                    className="min-w-0 flex-1 rounded-lg bg-sky-50 px-2 py-2.5 text-center text-xs font-semibold text-sky-700 transition hover:bg-sky-100 dark:bg-sky-900/30 dark:text-sky-300 dark:hover:bg-sky-900/50"
+                  >
+                    View all notifications
+                  </button>
+                </div>
+              </div>
+            </div>
+
             </>
           )}
         </div>
